@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pinoy Taho LA brings the comforting taste of traditional Filipino taho to Los Angeles. Explore traditional, ube, and pandan taho." />
+  <title>Pinoy Taho LA | A Taste of Home, Wherever You Are</title>
+  <style>
+    :root {
+      --cream: #fff8eb;
+      --paper: #fffdf7;
+      --brown: #542b18;
+      --brown-dark: #35190e;
+      --caramel: #b96524;
+      --gold: #f5b83d;
+      --red: #b83d28;
+      --green: #536e3e;
+      --muted: #765f50;
+      --line: #ead9c4;
+      --shadow: 0 12px 32px rgba(84, 43, 24, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0;
+      font-family: ui-rounded, "Trebuchet MS", Arial, sans-serif;
+      color: var(--brown-dark);
+      background: var(--cream);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .announcement {
+      background: var(--brown-dark);
+      color: #fff7e8;
+      text-align: center;
+      padding: .45rem 1rem;
+      font-size: .88rem;
+      letter-spacing: .03em;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 253, 247, .96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+    .nav-wrap {
+      max-width: 1180px;
+      margin: auto;
+      padding: .8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      text-decoration: none;
+      font-weight: 900;
+      color: var(--red);
+      font-size: 1.25rem;
+      line-height: 1.1;
+    }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--brown);
+      font-size: 1.45rem;
+      border: 2px solid var(--brown);
+    }
+    .brand small {
+      display: block;
+      color: var(--brown);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      margin-top: .2rem;
+    }
+    nav { display: flex; align-items: center; gap: 1.05rem; }
+    nav a {
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+    nav a:hover { color: var(--red); }
+    .nav-cta, .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 0;
+      border-radius: 999px;
+      background: var(--red);
+      color: white;
+      padding: .78rem 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .nav-cta:hover, .button:hover { background: #922b1d; transform: translateY(-2px); }
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: .55rem .75rem;
+      background: white;
+      color: var(--brown);
+      font-size: 1.2rem;
+    }
+    .container { width: min(1180px, calc(100% - 2.2rem)); margin-inline: auto; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(245,184,61,.35), transparent 24%),
+        linear-gradient(125deg, #fff4d9 0%, #fffaf0 55%, #f6e4ca 100%);
+      padding: 5.2rem 0 4.5rem;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+    .eyebrow {
+      display: inline-block;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+      font-weight: 900;
+      margin-bottom: .7rem;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      color: var(--brown);
+      font-size: clamp(2.7rem, 5.7vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      margin-bottom: 1rem;
+    }
+    h1 span { color: var(--red); }
+    .hero-copy { max-width: 580px; font-size: 1.12rem; color: #684c3a; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.5rem 0 1.1rem; }
+    .button.secondary { background: transparent; color: var(--brown); border: 2px solid var(--brown); }
+    .button.secondary:hover { background: #f3e3c8; }
+    .hero-note { color: var(--muted); font-size: .9rem; }
+    .hero-photo {
+      position: relative;
+      min-height: 390px;
+      border-radius: 48% 48% 22px 22px;
+      overflow: hidden;
+      border: 8px solid rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      background: #e9d0a5;
+    }
+    .hero-photo img { width: 100%; height: 100%; min-height: 390px; object-fit: cover; }
+    .photo-label {
+      position: absolute;
+      left: 1rem; bottom: 1rem;
+      background: rgba(255,253,247,.94);
+      border-radius: 14px;
+      padding: .7rem 1rem;
+      font-weight: 800;
+      color: var(--brown);
+      box-shadow: 0 5px 20px rgba(0,0,0,.12);
+    }
+    .trust-strip { background: var(--brown); color: white; }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1.1rem 0; text-align: center; }
+    .trust-grid div { font-weight: 700; font-size: .94rem; }
+    section { padding: 5rem 0; }
+    .section-heading { max-width: 700px; margin: 0 auto 2.4rem; text-align: center; }
+    .section-heading h2 { color: var(--brown); font-size: clamp(2rem, 3.5vw, 3.1rem); line-height: 1.1; margin-bottom: .7rem; }
+    .section-heading p { color: var(--muted); margin-bottom: 0; }
+    .menu-section { background: var(--paper); }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+    .menu-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px rgba(84,43,24,.06);
+      display: flex;
+      flex-direction: column;
+    }
+    .menu-card img { width: 100%; height: 225px; object-fit: cover; background: #f3e2c7; }
+    .menu-card-content { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+    .menu-card h3 { font-size: 1.35rem; margin-bottom: .25rem; color: var(--brown); }
+    .menu-card p { color: var(--muted); font-size: .95rem; flex: 1; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-top: .4rem; }
+    .price { font-size: 1.25rem; color: var(--red); font-weight: 900; }
+    .tag { border-radius: 999px; padding: .25rem .6rem; background: #fff0c9; color: #74431c; font-size: .75rem; font-weight: 800; }
+    .small-button { border: 0; border-radius: 10px; background: var(--green); color: white; font-weight: 800; padding: .7rem 1rem; cursor: pointer; }
+    .small-button:hover { background: #3e542e; }
+    .notice { margin-top: 1.25rem; text-align: center; color: var(--muted); font-size: .88rem; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3rem; align-items: center; }
+    .about-art {
+      border-radius: 24px; overflow: hidden; min-height: 360px;
+      background: #ead5b2;
+    }
+    .about-art img { width: 100%; height: 100%; min-height: 360px; object-fit: cover; }
+    .about-copy h2 { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1; color: var(--brown); }
+    .about-copy p { color: var(--muted); }
+    .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; margin-top: 1.4rem; }
+    .value { background: #fff0d2; border-radius: 14px; padding: .9rem; font-weight: 800; color: var(--brown); }
+    .order-section { background: #f8ead5; }
+    .order-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .step { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 1.4rem; }
+    .step-num { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--gold); color: var(--brown); font-weight: 900; margin-bottom: .8rem; }
+    .step h3 { margin-bottom: .4rem; color: var(--brown); }
+    .step p { color: var(--muted); margin-bottom: 0; }
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+    .info-card { padding: 1.6rem; border-radius: 20px; border: 1px solid var(--line); background: white; }
+    .info-card h3 { color: var(--brown); font-size: 1.35rem; }
+    .info-card p, .info-card li { color: var(--muted); }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: .6rem 0; border-bottom: 1px solid #f0e4d5; }
+    .hours td:last-child { text-align: right; font-weight: 800; color: var(--brown); }
+    .hours-note { font-size: .84rem; margin-top: .8rem; }
+    .gallery-section { background: var(--paper); }
+    .gallery-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: .9rem; }
+    .gallery-grid img { width: 100%; height: 230px; object-fit: cover; border-radius: 18px; }
+    .quote-section { padding: 3.8rem 0; background: var(--green); color: white; text-align: center; }
+    blockquote { max-width: 800px; margin: 0 auto; font-size: clamp(1.25rem, 2.5vw, 2rem); font-weight: 700; line-height: 1.4; }
+    blockquote footer { margin-top: 1rem; font-size: .95rem; font-weight: 500; opacity: .9; }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 2rem; }
+    .contact-details p { color: var(--muted); }
+    .contact-form { display: grid; gap: .9rem; }
+    .contact-form label { display: grid; gap: .35rem; font-weight: 800; color: var(--brown); }
+    .contact-form input, .contact-form textarea, .contact-form select {
+      width: 100%; padding: .85rem 1rem; border: 1px solid #d9c4ad; border-radius: 10px;
+      font: inherit; background: white; color: var(--brown-dark);
+    }
+    .contact-form textarea { min-height: 120px; resize: vertical; }
+    .form-message { color: var(--green); font-weight: 800; min-height: 1.5rem; }
+    footer.site-footer { background: var(--brown-dark); color: #fff2dd; padding: 2rem 0; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .footer-row p { margin: 0; font-size: .9rem; }
+    .footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .footer-links a { color: #fff2dd; text-decoration: none; font-size: .9rem; }
+    .cart-toast {
+      position: fixed; bottom: 1rem; right: 1rem; z-index: 30; max-width: min(370px, calc(100% - 2rem));
+      padding: 1rem 1.2rem; border-radius: 14px; background: var(--brown-dark); color: white;
+      box-shadow: var(--shadow); display: none;
+    }
+    .cart-toast.show { display: block; }
+    .cart-toast button { float: right; margin-left: 1rem; background: transparent; color: white; border: 0; font-size: 1.1rem; cursor: pointer; }
+    @media (max-width: 900px) {
+      nav { gap: .65rem; }
+      nav a { font-size: .82rem; }
+      .hero-grid { gap: 1.5rem; }
+      .hero-photo, .hero-photo img { min-height: 330px; }
+    }
+    @media (max-width: 760px) {
+      .nav-wrap { flex-wrap: wrap; }
+      .menu-toggle { display: inline-block; }
+      nav { display: none; width: 100%; flex-direction: column; align-items: stretch; padding: .6rem 0 .3rem; }
+      nav.open { display: flex; }
+      nav a { padding: .55rem .2rem; font-size: 1rem; }
+      nav .nav-cta { text-align: center; }
+      .hero { padding: 3.5rem 0 3rem; }
+      .hero-grid, .about-grid, .location-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-photo { order: -1; min-height: 280px; border-radius: 22px; }
+      .hero-photo img { min-height: 280px; }
+      .trust-grid { grid-template-columns: 1fr; gap: .4rem; }
+      section { padding: 3.5rem 0; }
+      .menu-grid, .order-grid { grid-template-columns: 1fr; }
+      .menu-card img { height: 250px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid img:first-child { grid-column: 1 / -1; height: 250px; }
+      .about-art, .about-art img { min-height: 280px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">A little taste of the Philippines, right here in Los Angeles 🇵🇭</div>
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="Pinoy Taho LA home">
+        <span class="brand-mark" aria-hidden="true">🥣</span>
+        <span>Pinoy Taho LA<small>A Taste of Home, Wherever You Are.</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav id="mainNav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About Us</a>
+        <a href="#location">Location & Hours</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="#order">Get Taho</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">A Filipino favorite, made with love</span>
+          <h1>A taste of <span>home</span>, one spoonful at a time.</h1>
+          <p class="hero-copy">Remember the taho vendor calling out on a beautiful Philippine morning? Bring that warm, familiar feeling into your day with Pinoy Taho LA.</p>
+          <div class="hero-actions">
+            <a class="button" href="#menu">Explore Our Menu</a>
+            <a class="button secondary" href="#about">Our Story</a>
+          </div>
+          <p class="hero-note">Traditional taho • Sweet arnibal • Soft tofu • Sago pearls</p>
+        </div>
+        <div class="hero-photo">
+          <img src="https://t4.ftcdn.net/jpg/15/28/49/71/360_F_1528497150_0yXuj5Bz73C0DVawHdTsoD6fnRrhWNi9.jpg" alt="A warm, comforting food bowl styled for a welcoming food brand" />
+          <div class="photo-label">Made for your moments of home 💛</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-grid">
+        <div>🥄 Filipino comfort in every cup</div>
+        <div>💛 Warm, welcoming service</div>
+        <div>📱 Easy to explore on your phone</div>
+      </div>
+    </div>
+
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Something sweet, something familiar</span>
+          <h2>Find your favorite taho</h2>
+          <p>From the classic you grew up with to colorful new favorites, there’s a little taste of home for everyone.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <img src="https://sweetsimplevegan.com/wp-content/uploads/2023/03/Easy_Taho_Recipe_Arnibal_sweet_simple_vegan_6.jpg" alt="Creamy dessert in a glass, representing traditional taho" loading="lazy" />
+            <div class="menu-card-content">
+              <span class="tag">The classic</span>
+              <h3>Traditional Taho</h3>
+              <p>Silky soft tofu with rich arnibal syrup and chewy sago pearls—the nostalgic Filipino favorite.</p>
+              <div class="price-row"><span class="price">From $4.00</span><button class="small-button" data-item="Traditional Taho">Add to order</button></div>
+            </div>
+          </article>
+          <article class="menu-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvigJSGZwSKqm61GNuIJyokflQZsyLwdWDhwujaOA7nw&s=10" alt="Purple ube-inspired dessert" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=85';" />
+            <div class="menu-card-content">
+              <span class="tag">A modern favorite</span>
+              <h3>Ube Taho</h3>
+              <p>A playful purple twist inspired by the beloved Filipino ube flavor, layered with soft tofu and sago.</p>
+              <div class="price-row"><span class="price">From $5.00</span><button class="small-button" data-item="Ube Taho">Add to order</button></div>
+            </div>
+          </article>
+          <article class="menu-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLNSqA8XDK6aHAOFNHNjxlmqhQXwupk976cZUYtakzWg&s=10" alt="Fresh green dessert ingredients" loading="lazy" />
+            <div class="menu-card-content">
+              <span class="tag">Fresh and fragrant</span>
+              <h3>Pandan Taho</h3>
+              <p>A fragrant pandan-inspired option with a gentle sweetness for a fresh take on a comforting treat.</p>
+              <div class="price-row"><span class="price">From $5.00</span><button class="small-button" data-item="Pandan Taho">Add to order</button></div>
+            </div>
+          </article>
+        </div>
+        <p class="notice">Sample prices for this website mockup. Please confirm actual menu items, ingredients, availability, and prices before publishing.</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-art">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzbIuBG3TAlhcDkCI5qfnoYzlWFhZjLoNzNAgGnk7HBg&s=10" alt="Freshly prepared food representing care and tradition" loading="lazy" />
+        </div>
+        <div class="about-copy">
+          <span class="eyebrow">Our story</span>
+          <h2>More than taho. It’s a taste of home.</h2>
+          <p>For many Filipinos, taho is part of the soundtrack of childhood: the familiar call of a street vendor, warm silken tofu, sweet arnibal, and sago pearls shared on a quiet morning.</p>
+          <p>Pinoy Taho LA celebrates that tradition and the Filipino community in Los Angeles. Our goal is to make it easier to enjoy a comforting favorite, share a memory, and feel a little closer to home—even on the busiest day.</p>
+          <div class="values">
+            <div class="value">🇵🇭 Filipino culture & heritage</div>
+            <div class="value">🤎 Comfort & nostalgia</div>
+            <div class="value">🥣 A beloved classic</div>
+            <div class="value">🌞 A warm welcome for all</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Quick and simple</span>
+          <h2>Your taho moment is just a few steps away</h2>
+          <p>We want it to be easy to find your favorite and plan your pickup.</p>
+        </div>
+        <div class="order-grid">
+          <article class="step"><div class="step-num">1</div><h3>Choose your taho</h3><p>Explore the menu and choose traditional, ube, or pandan taho.</p></article>
+          <article class="step"><div class="step-num">2</div><h3>Contact us to order</h3><p>Use the contact details or social links provided by the business to confirm availability and place your order.</p></article>
+          <article class="step"><div class="step-num">3</div><h3>Confirm pickup details</h3><p>We’ll confirm the current pickup location, timing, and total before you head over.</p></article>
+        </div>
+        <div style="text-align:center;margin-top:1.7rem"><a class="button" href="#contact">Ask About Ordering</a></div>
+      </div>
+    </section>
+
+    <section id="location">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Come say hello</span>
+          <h2>Location & hours</h2>
+          <p>Planning a stop before work or a sweet weekend treat? Check the latest details before you visit.</p>
+        </div>
+        <div class="location-grid">
+          <div class="info-card">
+            <h3>📍 Find Pinoy Taho LA</h3>
+            <p><strong>Service area:</strong> Los Angeles, California</p>
+            <p>Our exact vending or pickup location will be shared here once confirmed. Follow our social channels or contact us before making a special trip.</p>
+            <a class="button secondary" href="#contact">Ask for Current Location</a>
+          </div>
+          <div class="info-card">
+            <h3>🕒 Hours of operation</h3>
+            <table class="hours" aria-label="Operating hours">
+              <tr><td>Monday–Friday</td><td>To be announced</td></tr>
+              <tr><td>Saturday</td><td>To be announced</td></tr>
+              <tr><td>Sunday</td><td>To be announced</td></tr>
+            </table>
+            <p class="hours-note">Hours and availability may change. Confirm before visiting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">A little look at the good stuff</span>
+          <h2>Made for sharing memories</h2>
+          <p>Swap these sample images for real photos of your taho, traditional vendor setup, customers, and community events.</p>
+        </div>
+        <div class="gallery-grid">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV83SBaLB_V0X7-K8nIUAKX4baJwCgMMKjBZAJaEjiTw&s=10" alt="Fresh food spread" loading="lazy" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVCmfJ1TSK3w975Soh_OO0qS7OeUYUCbMkVQmYVrqz7A&s=10" alt="Sweet dessert in a glass" loading="lazy" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGHICshDvN5J3273KVA1TCi-mM72Agz4H-rwqgi1cNAA&s=10" alt="Comforting food close-up" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <div class="container">
+        <blockquote>
+          “Living in LA gives me opportunities to grow, but sometimes I really miss home. A simple cup of taho reminds me of my childhood, my family, and the mornings I spent in the Philippines.”
+          <footer>— Maria Reyes, our primary customer persona</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">We’d love to hear from you</span>
+          <h2>Let’s keep the taho tradition going</h2>
+          <p>Questions about flavors, availability, or pickup? Send us a message.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-details">
+            <h3>Pinoy Taho LA</h3>
+            <p><strong>Serving:</strong> Los Angeles, California</p>
+            <p><strong>Email:</strong> Add your business email here</p>
+            <p><strong>Social:</strong> Add your Instagram and TikTok links here</p>
+            <p>Follow along for location updates, flavor announcements, and community pop-ups.</p>
+          </div>
+          <form class="info-card contact-form" id="contactForm">
+            <label for="name">Your name<input id="name" name="name" autocomplete="name" required placeholder="Maria Reyes" /></label>
+            <label for="email">Email address<input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label>
+            <label for="topic">What can we help with?
+              <select id="topic" name="topic">
+                <option>Menu and prices</option>
+                <option>Ordering and pickup</option>
+                <option>Location and hours</option>
+                <option>Events and catering</option>
+                <option>Other question</option>
+              </select>
+            </label>
+            <label for="message">Message<textarea id="message" name="message" required placeholder="Tell us what you're looking for..."></textarea></label>
+            <button class="button" type="submit">Prepare Message</button>
+            <p class="form-message" id="formMessage" aria-live="polite"></p>
+            <small>This demo form does not send or store messages. Connect it to an email service or backend before launch.</small>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p><strong>Pinoy Taho LA</strong> · A Taste of Home, Wherever You Are. © <span id="year"></span></p>
+      <div class="footer-links"><a href="#menu">Menu</a><a href="#about">Our Story</a><a href="#location">Find Us</a><a href="#contact">Contact</a></div>
+    </div>
+  </footer>
+
+  <div class="cart-toast" id="cartToast" role="status" aria-live="polite">
+    <button id="closeToast" aria-label="Dismiss">×</button>
+    <strong id="toastTitle">Added to your list</strong>
+    <div id="toastText">Contact us to confirm availability and complete your order.</div>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+    mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open navigation');
+      menuToggle.textContent = '☰';
+    }));
+
+    const toast = document.getElementById('cartToast');
+    document.querySelectorAll('[data-item]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.getElementById('toastTitle').textContent = button.dataset.item + ' added to your interest list!';
+        document.getElementById('toastText').textContent = 'This demo cannot take payment or submit an order yet. Contact Pinoy Taho LA to confirm price, availability, and pickup.';
+        toast.classList.add('show');
+      });
+    });
+    document.getElementById('closeToast').addEventListener('click', () => toast.classList.remove('show'));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const topic = document.getElementById('topic').value;
+      document.getElementById('formMessage').textContent =
+        `Thanks, ${name}! Your message is ready to be connected to a real email service. Topic: ${topic}.`;
+    });
+  </script>
+</body>
+</html>
